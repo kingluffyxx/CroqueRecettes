@@ -74,11 +74,9 @@
     "post-update-cmd": [
       "@auto-scripts"
     ],
-    "scripts": {
-      "vercel": [
-        "composer install --no-dev --optimize-autoloader",
-      ]
-    }
+    "vercel": [
+      "composer install --no-dev --optimize-autoloader"
+    ]
   },
   "conflict": {
     "symfony/symfony": "*"
