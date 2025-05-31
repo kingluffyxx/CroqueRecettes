@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion - CroqueRecettes
+{% endblock %}
+
+{% block body %}
+
+	<div class="mx-auto px-6 py-12 hero container">
+		<div class="lg:flex-row-reverse flex-col hero-content">
+			<div class="lg:text-left text-center">
+				<h1 class="font-bold text-5xl">Connectez-vous dès maintenant !</h1>
+				<p class="py-6">
+					Profitez d’un accès rapide et sécurisé. Rejoignez notre communauté et découvrez des recettes délicieuses partagées par des passionnés comme vous.
+				</p>
+			</div>
+			<div class="bg-base-100 shadow-2xl w-full max-w-sm card shrink-0">
+				<div class="card-body">
+					<form method="post">
+						{% if error %}
+							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						{% endif %}
+
+						{% if app.user %}
+							<div class="mb-3">
+								You are logged in as
+								{{ app.user.userIdentifier }},
+								<a href="{{ path('app_logout') }}">Logout</a>
+							</div>
+						{% endif %}
+						<fieldset class="fieldset">
+							<label class="label" for="email">Email</label>
+							<input id="email" type="email" class="input" value="{{ last_username }}" placeholder="Email" name="_username" autocomplete="email" required autofocus/>
+							<label class="label" for="Password">Password</label>
+							<input id="password" name="_password" type="password" class="input" placeholder="Password" autocomplete="current-password" required/>
+							<input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+							<button class="mt-4 btn btn-neutral" type="submit">Sign in</button>
+						</fieldset>
+					</form>
+                     <div class="font-medium text-sm">
+                        Pas encore inscrit ? <a href="/register" class="text-blue-700 hover:underline"> Créez un compte</a>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

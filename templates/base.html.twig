@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}CroqueRecettes
+			{% endblock %}
+		</title>
+
+		{# Feuilles de style compilées #}
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+	</head>
+	<body class="flex flex-col min-h-screen">
+
+		{# Header React #}
+		<div {{ react_component('Header', {user: app.user ? app.user.userIdentifier : null} ) }}></div>
+		{% if app.request.getPathInfo() != '/' %}
+			<div {{ react_component('Sidebar', {} ) }}></div>
+		{% endif %}
+
+		{# Conteneur principal #}
+		{# Contenu principal #}
+		<main class="pt-24 flex-grow  {{app.request.getPathInfo() != '/' ? 'sm:ml-64 p-4' : ' px-4 ' }}"> 
+            {% block body %}{% endblock %}
+		</main>
+
+        {# Footer React #}
+        <div {{ react_component('Footer', {} ) }}></div>
+
+        {# Scripts compilés #}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+	</body>
+</html>

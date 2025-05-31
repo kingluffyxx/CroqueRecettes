@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ recipe.title }}{% endblock %}
+
+{% block body %}
+<div class="mx-auto p-6 w-8/12">
+    <h1 class="mb-4 font-bold text-gray-800 text-4xl">{{ recipe.title }}</h1>
+
+    {% if recipe.image %}
+        <img src="{{ recipe.image }}" alt="{{ recipe.title }}" class="shadow mb-6 rounded-lg w-full h-100 object-cover">
+    {% endif %}
+
+    <div class="mb-6 text-gray-700">
+        <h2 class="mb-2 font-semibold text-2xl">Description</h2>
+        <p class="whitespace-pre-line">{{ recipe.description }}</p>
+    </div>
+
+    <div class="mb-6 text-gray-700">
+        <h2 class="mb-2 font-semibold text-2xl">Ingrédients</h2>
+        <p class="whitespace-pre-line">{{ recipe.ingredients }}</p>
+    </div>
+
+    <div class="text-gray-700">
+        <h2 class="mb-2 font-semibold text-2xl">Instructions</h2>
+        <p class="whitespace-pre-line">{{ recipe.steps }}</p>
+    </div>
+</div>
+{% endblock %}

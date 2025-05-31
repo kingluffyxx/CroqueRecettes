@@ -1,0 +1,12 @@
+{# templates/home.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Hello HomeController!
+{% endblock %}
+
+{% block body %}
+    <div {{ react_component('HomePage', {}) }}>
+        Loading... <i class="fas fa-cog fa-spin fa-3x"></i>
+    </div>
+{% endblock %}

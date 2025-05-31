@@ -1,0 +1,60 @@
+<div{{attributes}}>
+	<p>
+		{{ form_start(form,  {'action': path('recipe_create'), attr: {
+                novalidate: true,
+                'data-action': 'live#action:prevent',
+                'data-live-action-param': 'files|saveRecipe',
+            }}) }}
+		<fieldset class="bg-base-200 p-4 border border-base-300 rounded-box w-full fieldset">
+			<legend class="fieldset-legend">Création d'un recette</legend>
+
+			{{ form_label(form.title, 'Titre de la recette') }}
+			{{ form_widget(form.title, {'attr': {'class': 'input validator w-full'}}) }}
+			{% for error in form.title.vars.errors %}
+				<div class="validator-hint">
+					{{ error.message }}
+				</div>
+			{% endfor %}
+
+			{{ form_label(form.description, 'Description courte') }}
+			{{ form_widget(form.description, {'attr': {'class': 'textarea validator w-full'}}) }}
+			{% for error in form.description.vars.errors %}
+				<div class="validator-hint">
+					{{ error.message }}
+				</div>
+			{% endfor %}
+
+			{{ form_label(form.ingredients, 'Liste des ingrédients') }}
+			{{ form_widget(form.ingredients, {'attr': {'class': 'textarea validator w-full'}}) }}
+			{% for error in form.ingredients.vars.errors %}
+				<div class="validator-hint">
+					{{ error.message }}
+				</div>
+			{% endfor %}
+
+			{{ form_label(form.steps, 'Décrivez les étapes') }}
+			{{ form_widget(form.steps, {'attr': {'class': 'textarea validator w-full'}}) }}
+			{% for error in form.steps.vars.errors %}
+				<div class="validator-hint">
+					{{ error.message }}
+				</div>
+			{% endfor %}
+
+			{# {{ form_label(form.image, 'Image de la recette') }}
+									{{ form_widget(form.image, {'attr': {'class': 'file-input w-full'}}) }}
+									{{ form_errors(form.image) }}
+						            {{ form_rest(form) }} #}
+			<fieldset class="fieldset">
+				<legend class="fieldset-legend">Pick a file</legend>
+				<input type="file" class="w-full file-input" id="image_recipe" name="image_recipe"/>
+				<label class="label" for="image_recipe">Max size 5MB</label>
+			</fieldset>
+			<button type="submit" class="px-4 py-2 rounded transition btn btn-primary {{ this.hasValidationErrors ? 'btn-disabled' : '' }}">
+				Add Recipe
+			</button>
+
+		</fieldset>
+
+		{{ form_end(form) }}
+	</p>
+</div>
