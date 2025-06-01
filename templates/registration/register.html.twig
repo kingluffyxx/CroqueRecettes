@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription - CroqueRecettes{% endblock %}
+{% block title %}Inscription - CroqueRecettes
+{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+	{% for flash_error in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+	{% endfor %}
 
-    <div class="bg-base-100 px-6 py-12 hero">
+	<div class="bg-base-100 px-6 py-12 hero">
 		<div class="lg:flex-row-reverse flex-col hero-content">
 			<div class="lg:text-left text-center">
 				<h1 class="font-bold text-5xl">Inscrivez-vous dès aujourd’hui !</h1>
@@ -19,27 +20,28 @@
 				<div class="card-body">
 					<form method="post">
 						{% for flash_error in app.flashes('verify_email_error') %}
-                        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-                    {% endfor %}
+							<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+						{% endfor %}
 
 						<fieldset class="fieldset">
-                        {{ form_errors(registrationForm) }}
+							{{ form_errors(registrationForm) }}
 
-                        {{ form_start(registrationForm) }}
-                            {{ form_row(registrationForm.email) }}
-                            {{ form_row(registrationForm.plainPassword, {
+							{{ form_start(registrationForm) }}
+							{{ form_row(registrationForm.email) }}
+							{{ form_row(registrationForm.plainPassword, {
                                 label: 'Password'
                             }) }}
-														<input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('registration_form') }}">
+							<input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('registration_form') }}">
 
-                            <button class="mt-4 btn btn-neutral" type="submit">S’inscrire</button>
-							
-                        {{ form_end(registrationForm) }} 
+							<button class="mt-4 btn btn-neutral" type="submit">S’inscrire</button>
+
+							{{ form_end(registrationForm) }}
 						</fieldset>
 					</form>
-                     <div class="font-medium text-sm">
-                        Déjà inscrit ? <a href="/login" class="text-blue-700 hover:underline">Connectez-vous</a>
-                    </div>
+					<div class="font-medium text-sm">
+						Déjà inscrit ?
+						<a href="/login" class="text-blue-700 hover:underline">Connectez-vous</a>
+					</div>
 				</div>
 			</div>
 		</div>
