@@ -1,2 +1,2 @@
-release: php bin/console doctrine:migrations:migrate --no-interaction && php bin/console cache:clear --env=prod
+release: php bin/console doctrine:migrations:migrate --no-interaction && php bin/console cache:clear --env=prod && php bin/console doctrine:schema:update --force --no-interaction
 web: heroku-php-apache2 public/
