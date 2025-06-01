@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+    # Active le moteur de réécriture
+    RewriteEngine On
+
+    # Si le fichier ou le répertoire existe, on le sert directement
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Sinon, réécrire toute requête vers index.php
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Autorise l’affichage des pages d’erreur Symfony
+ErrorDocument 404 /index.php
