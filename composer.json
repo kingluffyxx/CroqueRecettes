@@ -77,7 +77,9 @@
     ],
     "vercel": [
       "npm run build",
-      "bin/console doctrine:migrations:migrate --no-interaction"
+      "@php bin/console doctrine:migrations:migrate --no-interaction",
+      "@php bin/console cache:clear --env=prod",
+      "@php bin/console assets:install public --env=prod"
     ]
   },
   "conflict": {
