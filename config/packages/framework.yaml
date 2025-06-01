@@ -8,6 +8,8 @@ framework:
         cookie_secure: auto
         cookie_samesite: lax
 
+    csrf_protection: ~
+    
     #esi: true
     #fragments: true
 
