@@ -30,8 +30,10 @@
                             {{ form_row(registrationForm.plainPassword, {
                                 label: 'Password'
                             }) }}
-							{{ form_rest(form) }}
+														<input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('registration_form') }}">
+
                             <button class="mt-4 btn btn-neutral" type="submit">S’inscrire</button>
+							
                         {{ form_end(registrationForm) }} 
 						</fieldset>
 					</form>
