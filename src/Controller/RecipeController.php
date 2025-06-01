@@ -162,7 +162,7 @@ class RecipeController extends AbstractController
         return $this->json($normalizer->normalize($recipe, null, ['groups' => 'read']), 200, [], ['groups' => 'recipe:read']);
     }
 
-    #[Route('/recipes/{id}', name: 'recipe_delete', methods: ['DELETE'])]
+    #[Route('/recipe/{id}', name: 'recipe_delete', methods: ['DELETE'])]
     public function delete(Recipe $recipe): Response
     {
         $this->em->remove($recipe);

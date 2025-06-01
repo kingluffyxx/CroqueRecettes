@@ -16,7 +16,7 @@ export default function RecipeCard({
   const isFavorite = userFavoriteIds.includes(id);
   const handleDelete = async () => {
     try {
-      const response = await fetch("/dashboard/recipes/" + id, {
+      const response = await fetch("/dashboard/recipe/" + id, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
