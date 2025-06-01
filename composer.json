@@ -73,9 +73,6 @@
     ],
     "post-update-cmd": [
       "@auto-scripts"
-    ],
-    "vercel": [
-      "composer install --no-dev --optimize-autoloader"
     ]
   },
   "conflict": {
