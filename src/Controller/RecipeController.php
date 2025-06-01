@@ -30,6 +30,25 @@ class RecipeController extends AbstractController
         $this->recipeRepository = $recipeRepository;
     }
 
+    #[Route('/', name: 'app_dashboard', methods: ['GET'])]
+    public function index(NormalizerInterface $normalizer): Response
+    {
+        $repository =  $this->em->getRepository(Recipe::class);
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->json(['error' => 'Unauthorized'], 401);
+        }
+
+        $favoriteRecipes = $user->getFavorites()->map(fn($f) => $f->getRecipe()->getId());
+        // look for a single Product by name
+        $recipes = $repository->findAll();
+        return $this->render('dashboard/index.html.twig', [
+            'recipes' => $normalizer->normalize($recipes, null, ['groups' => 'read']),
+            'favorites' => $normalizer->normalize($favoriteRecipes, null, ['groups' => 'read']),
+        ]);
+    }
+
     #[Route('/my_recipes', name: 'my_recipes', methods: ['GET'])]
     public function getMyRecipes(NormalizerInterface $normalizer): Response
     {
@@ -64,7 +83,7 @@ class RecipeController extends AbstractController
         $favoriteRecipesIds = $user->getFavorites()->map(fn($f) => $f->getRecipe()->getId());
 
         
-        return $this->render('dashboard/recipe/my_recipes.html.twig', [
+        return $this->render('dashboard/recipe/my_recipes_favorites.html.twig', [
             'recipes' => $normalizer->normalize($recipes, null, ['groups' => 'read']),
             'favorites' => $normalizer->normalize($favoriteRecipesIds, null, ['groups' => 'read']),
             'title' => 'Mes recettes favorites',

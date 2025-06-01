@@ -43,15 +43,11 @@ class Recipe
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
-    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Rating::class, orphanRemoval: true)]
-    private Collection $ratings;
-
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Favorite::class, orphanRemoval: true)]
     private Collection $favorites;
 
     public function __construct()
     {
-        $this->ratings = new ArrayCollection();
         $this->favorites = new ArrayCollection();
     }
     public function getId(): ?int
@@ -123,31 +119,6 @@ class Recipe
     public function setAuthor(?User $author): static
     {
         $this->author = $author;
-        return $this;
-    }
-
-    /** @return Collection<int, Rating> */
-    public function getRatings(): Collection
-    {
-        return $this->ratings;
-    }
-
-    public function addRating(Rating $rating): static
-    {
-        if (!$this->ratings->contains($rating)) {
-            $this->ratings->add($rating);
-            $rating->setRecipe($this);
-        }
-        return $this;
-    }
-
-    public function removeRating(Rating $rating): static
-    {
-        if ($this->ratings->removeElement($rating)) {
-            if ($rating->getRecipe() === $this) {
-                $rating->setRecipe(null);
-            }
-        }
         return $this;
     }
 

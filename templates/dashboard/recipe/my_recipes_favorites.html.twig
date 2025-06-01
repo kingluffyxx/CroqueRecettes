@@ -5,13 +5,11 @@
 
 {% block body %}
 	<div class="mx-auto px-6 font-bold text-5xl text-center">
-		<h1>Mes recettes</h1>
+		<h1>Mes favoris</h1>
 	</div>
 
 	<div>
-
 		<div {{ react_component('RecipesSection', {'recipes': recipes, 'idModal': 'editRecipe', 'userFavoriteIds': favorites, 'type' : type} ) }}></div>
-		<div {{ react_component('SpeedDial', {'idModal': 'createRecipe'} ) }}></div>
 	</div>
 
 	<dialog id="createRecipe" class="modal">

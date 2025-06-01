@@ -15,10 +15,10 @@ export default function RecipeSearch({recipes, favorites}) {
                             <path d="m21 21-4.3-4.3"></path>
                         </g>
                     </svg>
-                    <input type="search" className="focus:ring-0 w-full" placeholder="Search" value={query}
+                    <input type="search" className="focus:ring-0 w-full" placeholder="Rechercher une recette" value={query}
                         onChange={(e) => setQuery(e.target.value)}/>
                 </label>
-                <label htmlFor="default-search" className="sr-only mb-2 font-medium text-gray-900 text-sm">Search</label>
+                <label htmlFor="default-search" className="sr-only mb-2 font-medium text-gray-900 text-sm">Rechercher</label>
             </div>
          <RecipesSection q={query} recipes={recipes} userFavoriteIds={favorites} type="read"/>
         </>

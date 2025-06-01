@@ -3,8 +3,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Découvrez des recettes simples et savoureuses">
+		<meta name="author" content="CroqueRecettes">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>
-			{% block title %}CroqueRecettes
+			{% block title %}
+				CroqueRecettes
 			{% endblock %}
 		</title>
 
@@ -17,13 +21,13 @@
 
 		{# Header React #}
 		<div {{ react_component('Header', {user: app.user ? app.user.userIdentifier : null} ) }}></div>
-		{% if app.request.getPathInfo() != '/' %}
+		{% if app.request.getPathInfo() starts with '/dashboard' %}
 			<div {{ react_component('Sidebar', {} ) }}></div>
 		{% endif %}
 
 		{# Conteneur principal #}
 		{# Contenu principal #}
-		<main class="pt-24 flex-grow  {{app.request.getPathInfo() != '/' ? 'sm:ml-64 p-4' : ' px-4 ' }}"> 
+		<main class="pt-24 flex-grow  {{app.request.getPathInfo() starts with '/dashboard' ? 'sm:ml-64 p-4' : ' px-4 ' }}"> 
             {% block body %}{% endblock %}
 		</main>
 

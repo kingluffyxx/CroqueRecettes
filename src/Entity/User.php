@@ -42,15 +42,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Recipe::class, orphanRemoval: true)]
     private Collection $recipes;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Rating::class, orphanRemoval: true)]
-    private Collection $ratings;
-
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Favorite::class, orphanRemoval: true)]
     private Collection $favorites;
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
-        $this->ratings = new ArrayCollection();
         $this->favorites = new ArrayCollection();
     }
     public function getId(): ?int
@@ -163,33 +159,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    public function getRatings(): Collection
-    {
-        return $this->ratings;
-    }
-
-    public function addRating(Rating $rating): self
-    {
-        if (!$this->ratings->contains($rating)) {
-            $this->ratings->add($rating);
-            $rating->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRating(Rating $rating): self
-    {
-        if ($this->ratings->removeElement($rating)) {
-            if ($rating->getUser() === $this) {
-                $rating->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
+    
     public function getFavorites(): Collection
     {
         return $this->favorites;

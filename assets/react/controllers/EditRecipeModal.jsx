@@ -54,8 +54,9 @@ export default function EditRecipeModal({ recipe, onSave, onClose }) {
           <fieldset className="bg-base-200 p-4 border border-base-300 rounded-box w-full fieldset">
             <legend className="fieldset-legend">Edition de la recette</legend>
 
-            <label className="label required">Titre de la recette</label>
+            <label className="label required" htmlFor="title">Titre de la recette</label>
             <input
+              id="title"
               type="text"
               className="mb-3 w-full input"
               value={title}
@@ -64,8 +65,9 @@ export default function EditRecipeModal({ recipe, onSave, onClose }) {
               onChange={(e) => setTitle(e.target.value)}
             />
 
-            <label className="label required">Description courte</label>
+            <label className="label required" htmlFor="description">Description courte</label>
             <textarea
+              id="description"
               className="mb-3 w-full textarea"
               value={description}
               required
@@ -73,8 +75,9 @@ export default function EditRecipeModal({ recipe, onSave, onClose }) {
               onChange={(e) => setDescription(e.target.value)}
             />
 
-            <label className="label required">Liste des ingrédients</label>
+            <label className="label required" htmlFor="ingredients">Liste des ingrédients</label>
             <textarea
+              id="ingredients"
               className="mb-3 w-full textarea"
               value={ingredients}
               required
@@ -82,8 +85,9 @@ export default function EditRecipeModal({ recipe, onSave, onClose }) {
               onChange={(e) => setIngredients(e.target.value)}
             />
 
-            <label className="label required">Décrivez les étapes</label>
+            <label className="label required" htmlFor="steps">Décrivez les étapes</label>
             <textarea
+              id="steps"
               className="mb-3 w-full textarea"
               value={steps}
               required
@@ -94,12 +98,13 @@ export default function EditRecipeModal({ recipe, onSave, onClose }) {
             <fieldset className="mb-4">
               <legend className="mb-1 font-semibold">Pick a file</legend>
               <input
+                id="file"
                 type="file"
                 className="w-full file-input"
                 accept="image/*"
                 onChange={(e) => setImage(e.target.files[0])}
               />
-              <label className="text-sm label">Max size 5MB</label>
+              <label className="text-sm label" htmlFor="file">Max size 5MB</label>
             </fieldset>
 
             <button

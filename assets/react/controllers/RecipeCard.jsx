@@ -14,6 +14,12 @@ export default function RecipeCard({
 }) {
   
   const isFavorite = userFavoriteIds.includes(id);
+
+  function truncate(text, maxLength) {
+    if (!text) return '';
+    return text.length > maxLength ? text.slice(0, maxLength) + '…' : text;
+  }
+
   const handleDelete = async () => {
     try {
       const response = await fetch("/dashboard/recipe/" + id, {
@@ -40,27 +46,27 @@ export default function RecipeCard({
   
 
   return (
-    <div className="bg-base-100 shadow-sm w-96 card">
+    <div className="bg-base-100 shadow-sm card">
       <figure className="">
         {!image ? (
           <img
             src="/images/anh-nguyen-kcA-c3f_3FE-unsplash.jpg"
             alt="image_recipe"
             className="w-full h-66 object-cover"
-            loading="lazy"
           />
         ) : (
           <img
             src={image}
             alt="image_recipe"
             className="w-full h-66 object-cover"
-            loading="lazy"
           />
         )}
       </figure>
       <div className="items-center text-center card-body">
         <h2 className="card-title">{title}</h2>
-        <p>{description}</p>
+        <p>{truncate(description, 250)}</p>
+        <p className="hidden">{ingredients}</p>
+        <p className="hidden">{steps}</p>
         <div className="justify-end card-actions">
          <a href={`/dashboard/recipe/${id}`}
           className="btn btn-circle">

@@ -65,7 +65,7 @@ export default function Sidebar() {
 
       <aside
         id="default-sidebar"
-        className={`fixed top-16 left-0 z-40 w-64 h-screen transition-transform sm:translate-x-0 bg-gray-50 ${
+        className={`fixed top-18 left-0 z-40 w-64 h-screen transition-transform sm:translate-x-0 bg-gray-50 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         aria-label="Sidebar"

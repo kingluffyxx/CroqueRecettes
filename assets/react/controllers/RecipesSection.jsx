@@ -94,7 +94,7 @@ export default function RecipesSection({
   return (
     <>
       {recipes.length > 0 ? (
-        <section className="gap-6 grid grid-cols-1 md:grid-cols-4 py-8">
+        <section className="gap-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 py-8">
           {recipes.map((r) => (
             <RecipeCard
               key={r.id}

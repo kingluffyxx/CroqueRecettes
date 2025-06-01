@@ -39,18 +39,13 @@
 					{{ error.message }}
 				</div>
 			{% endfor %}
-
-			{# {{ form_label(form.image, 'Image de la recette') }}
-									{{ form_widget(form.image, {'attr': {'class': 'file-input w-full'}}) }}
-									{{ form_errors(form.image) }}
-						            {{ form_rest(form) }} #}
 			<fieldset class="fieldset">
-				<legend class="fieldset-legend">Pick a file</legend>
+				<legend class="fieldset-legend">Choisir un fichier</legend>
 				<input type="file" class="w-full file-input" id="image_recipe" name="image_recipe"/>
-				<label class="label" for="image_recipe">Max size 5MB</label>
+				<label class="label" for="image_recipe">Taille maximale : 2 Mo</label>
 			</fieldset>
 			<button type="submit" class="px-4 py-2 rounded transition btn btn-primary {{ this.hasValidationErrors ? 'btn-disabled' : '' }}">
-				Add Recipe
+				 Ajouter une recette
 			</button>
 
 		</fieldset>

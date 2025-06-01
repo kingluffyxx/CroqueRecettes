@@ -8,20 +8,24 @@
 
     {% if recipe.image %}
         <img src="{{ recipe.image }}" alt="{{ recipe.title }}" class="shadow mb-6 rounded-lg w-full h-100 object-cover">
+    {% else %}
+        <img src="/images/anh-nguyen-kcA-c3f_3FE-unsplash.jpg" alt="Placeholder" class="shadow mb-6 rounded-lg w-full h-100 object-cover">
     {% endif %}
-
     <div class="mb-6 text-gray-700">
-        <h2 class="mb-2 font-semibold text-2xl">Description</h2>
+        <p class="whitespace-pre-line">par <span class="italic">{{ recipe.author.email|slice(0, 3)|capitalize  }}</span></p>
+    </div>
+    <div class="mb-6 text-gray-700">
+        <h2 class="mb-2 font-semibold text-3xl">Description</h2>
         <p class="whitespace-pre-line">{{ recipe.description }}</p>
     </div>
 
     <div class="mb-6 text-gray-700">
-        <h2 class="mb-2 font-semibold text-2xl">Ingrédients</h2>
+        <h2 class="mb-2 font-semibold text-3xl">Ingrédients</h2>
         <p class="whitespace-pre-line">{{ recipe.ingredients }}</p>
     </div>
 
     <div class="text-gray-700">
-        <h2 class="mb-2 font-semibold text-2xl">Instructions</h2>
+        <h2 class="mb-2 font-semibold text-3xl">Instructions</h2>
         <p class="whitespace-pre-line">{{ recipe.steps }}</p>
     </div>
 </div>

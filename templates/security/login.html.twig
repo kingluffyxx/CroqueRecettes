@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion - CroqueRecettes
+{% block title %}
+	Connexion - CroqueRecettes
 {% endblock %}
 
 {% block body %}
@@ -16,27 +17,13 @@
 			<div class="bg-base-100 shadow-2xl w-full max-w-sm card shrink-0">
 				<div class="card-body">
 					<form method="post" action="{{ path('app_login') }}">
-						
-						{% set last_username = app.request.get('_username', '') %}
-						{% set error = app.request.attributes.get('error') %}
-						{% if error %}
-							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-						{% endif %}
-
-						{% if app.user %}
-							<div class="mb-3">
-								You are logged in as
-								{{ app.user.userIdentifier }},
-								<a href="{{ path('app_logout') }}">Logout</a>
-							</div>
-						{% endif %}
 						<fieldset class="fieldset">
 							<label class="label" for="email">Email</label>
 							<input id="email" type="email" class="input" value="{{ last_username }}" placeholder="Email" name="_username" autocomplete="email" required autofocus/>
-							<label class="label" for="Password">Password</label>
+							<label class="label" for="Password">Mot de passe</label>
 							<input id="password" name="_password" type="password" class="input" placeholder="Password" autocomplete="current-password" required/>
 							<input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
-							<button class="mt-4 btn btn-neutral" type="submit">Sign in</button>
+							<button class="mt-4 btn btn-neutral" type="submit">Connexion</button>
 						</fieldset>
 					</form>
                      <div class="font-medium text-sm">
