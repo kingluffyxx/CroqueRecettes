@@ -11,19 +11,19 @@
               Concentrez-vous sur vos recettes grâce à notre design épuré et sans distractions.
             </p>
           </div>
-          <div className="gap-8 grid md:grid-cols-3 mx-auto max-w-6xl">
+          <div className="justify-center items-center gap-8 grid md:grid-cols-3 mx-auto max-w-6xl">
             <img
-              src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop" alt="Nourriture"
+              src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop" alt="Nourriture 1"
               className="shadow-xl rounded-lg hover:scale-105 transition-all duration-500 transform"
             />
             <img
               src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=400&h=300&fit=crop"
-              alt="App Screenshot 2"
+              alt="Nourriture 2"
               className="shadow-xl rounded-lg hover:scale-105 transition-all duration-500 transform"
             />
             <img
               src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop"
-              alt="App Screenshot 3"
+              alt="Nourriture 3"
               className="shadow-xl rounded-lg hover:scale-105 transition-all duration-500 transform"
             />
           </div>

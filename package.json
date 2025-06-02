@@ -3,7 +3,6 @@
         "@babel/core": "^7.17.0",
         "@babel/preset-env": "^7.16.0",
         "@babel/preset-react": "^7.0.0",
-        "@headlessui/tailwindcss": "^0.2.2",
         "@hotwired/turbo": "^7.1.1 || ^8.0",
         "@iconify-json/mdi": "^1.2.3",
         "@iconify/json": "^2.2.342",
@@ -33,7 +32,6 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@headlessui/react": "^2.2.4",
         "@hotwired/stimulus": "^3.2.2",
         "@symfony/ux-react": "file:vendor/symfony/ux-react/assets",
         "@tailwindcss/postcss": "^4.1.7",

@@ -18,9 +18,9 @@ export default function Hero() {
         <img
           src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445"
           alt="Hero Illustration"
-          className="shadow-2xl rounded-2xl max-w-sm hover:scale-105 transition-all duration-500 transform"
+          className="shadow-2xl rounded-2xl sm:max-w-sm hover:scale-105 transition-all duration-500 transform"
         />
-        <div>
+        <div className="lg:text-left text-center">
           <h1 className="font-bold text-5xl">
             Découvrez des recettes simples et savoureuses
           </h1>
