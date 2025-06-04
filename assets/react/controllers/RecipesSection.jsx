@@ -74,7 +74,6 @@ export default function RecipesSection({
         notifyError(res.message || "Erreur lors de la suppression.");
         return;
       }
-      console.log("response", res);
       notifySuccess(res.message);
     } catch (e) {
       console.error("Erreur réseau : ", e);

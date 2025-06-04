@@ -27,7 +27,7 @@ export default function Hero() {
           <p className="py-6">
             Partagez vos plats préférés et explorez des idées gourmandes en quelques minutes.
           </p>
-          <button className="hover:scale-105 transition-all btn btn-xl btn-primary transform">Voir les recettes</button>
+          <a href="/login" className="hover:scale-105 transition-all btn btn-xl btn-primary transform">Voir les recettes</a>
         </div>
       </div>
     </div>

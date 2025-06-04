@@ -13,7 +13,6 @@ export default function EditRecipeModal({ recipe, onSave, onClose }) {
       setDescription(recipe.description);
       setIngredients(recipe.ingredients);
       setSteps(recipe.steps);
-      console.log(recipe.title);
     }
   }, [recipe]);
 
@@ -37,7 +36,8 @@ export default function EditRecipeModal({ recipe, onSave, onClose }) {
       return;
     }
 
-    const updated = await response.json();
+    let updated = await response.json();
+    updated.image = updated.image+"?v="+Date.now(); // Force reload of image
     onSave(updated);
     onClose();
   };

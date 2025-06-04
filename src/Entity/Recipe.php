@@ -102,7 +102,7 @@ class Recipe
 
     public function getImage(): ?string
     {
-        return $this->image ? '/uploads/' . $this->image : null;
+        return $this->image ? $this->image : null;
     }
 
     public function setImage(?string $image): static
@@ -139,10 +139,8 @@ class Recipe
 
     public function removeFavorite(Favorite $favorite): static
     {
-        if ($this->favorites->removeElement($favorite)) {
-            if ($favorite->getRecipe() === $this) {
-                $favorite->setRecipe(null);
-            }
+        if ($this->favorites->removeElement($favorite) && $favorite->getRecipe() === $this) {
+            $favorite->setRecipe(null);
         }
         return $this;
     }

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export default function Header({ user }) {
   
@@ -70,3 +71,7 @@ export default function Header({ user }) {
     </nav>
   );
 }
+
+Header.propTypes = {
+  user: PropTypes.string,
+};

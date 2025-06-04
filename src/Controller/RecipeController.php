@@ -16,6 +16,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Cloudinary\Cloudinary;
 
 #[Route('/dashboard')]
 #[IsGranted('ROLE_USER')]
@@ -99,57 +100,8 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/recipe/create', name: 'recipe_create', methods: ['POST'])]
-    public function create(Request $request, SluggerInterface $slugger): JsonResponse
-    {
-        $recipe = new Recipe();
-
-        // On crée un tableau avec les champs texte uniquement
-        $form = $this->createForm(RecipeForm::class, $recipe);
-        $form->handleRequest($request); // fonctionne aussi avec AJAX
-
-        // Manuellement : récupérer l'image
-        /** @var UploadedFile|null $imageFile */
-        $imageFile = $request->files->get('image');
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Si image envoyée
-            if ($imageFile) {
-                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
-
-                try {
-                    $imageFile->move(
-                        $this->getParameter('uploads_directory'), // à définir dans services.yaml
-                        $newFilename
-                    );
-                    $recipe->setImage($newFilename);
-                } catch (FileException $e) {
-                    return new JsonResponse(['errors' => ['image' => ['Erreur lors de l’upload.']]], 400);
-                }
-            }
-
-            $recipe->setAuthor($this->getUser());
-            $this->em->persist($recipe);
-            $this->em->flush();
-
-            return new JsonResponse(['success' => true], 201);
-        }
-
-        // Erreurs de validation
-        $errors = [];
-        foreach ($form->getErrors() as $error) {
-
-            $field = $error->getOrigin()->getName();
-            $errors[$field][] = $error->getMessage();
-        }
-
-        return new JsonResponse(['errors' => $errors], 400);
-    }
-
     #[Route('/recipe/{id}', name: 'recipe_update', methods: ['POST'])]
-    public function update(Request $request, Recipe $recipe, NormalizerInterface $normalizer): Response
+    public function update(Request $request, Recipe $recipe, NormalizerInterface $normalizer, SluggerInterface $slugger): Response
     {
         $recipe->setTitle($request->request->get('title'));
         $recipe->setDescription($request->request->get('description'));
@@ -158,23 +110,14 @@ class RecipeController extends AbstractController
 
         $fileUpload = $request->files->get('image');
         if ($fileUpload) {
-            $uploadDir = $this->getParameter('kernel.project_dir') . '/public/uploads';
 
-            // Créer le dossier s'il n'existe pas
-            if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0755, true);
-            }
-
-            // Générer un nom de fichier unique
-            $originalFilename = pathinfo($fileUpload->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = $this->slugify($originalFilename);
-            $newFilename = $safeFilename . '-' . uniqid() . '.' . $fileUpload->guessExtension();
-
-            // Déplacer le fichier
-            $fileUpload->move($uploadDir, $newFilename);
-
-            // Stocker le nom du fichier
-            $recipe->setImage($newFilename);
+            $cloudinary = new Cloudinary( $this->getParameter('cloudinary_url'));
+            $cloudinary->uploadApi()->upload($fileUpload->getRealPath(), [
+                'public_id' => $recipe->getImage(),
+                'resource_type' => 'image',
+                'overwrite' => true,
+                'invalidate' => true, // Invalider le cache
+            ]);
         }
 
         $this->em->flush();
@@ -219,15 +162,5 @@ class RecipeController extends AbstractController
         $this->em->flush();
 
         return $this->json(['message' => 'Favori ajouté'], 201);
-    }
-
-    private function slugify(string $text): string
-    {
-        // Convertir en minuscules et remplacer les caractères spéciaux
-        $text = strtolower($text);
-        $text = preg_replace('/[^a-z0-9]+/', '-', $text);
-        $text = trim($text, '-');
-
-        return $text ?: 'image';
     }
 }

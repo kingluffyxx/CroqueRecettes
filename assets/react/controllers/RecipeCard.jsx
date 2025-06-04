@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 export default function RecipeCard({
   title,
   description,
@@ -12,8 +12,9 @@ export default function RecipeCard({
   userFavoriteIds = [],
   type,
 }) {
-  
+
   const isFavorite = userFavoriteIds.includes(id);
+  const urlCloudinary = "https://res.cloudinary.com/drwh2v0dg/image/upload/";
 
   function truncate(text, maxLength) {
     if (!text) return '';
@@ -56,7 +57,7 @@ export default function RecipeCard({
           />
         ) : (
           <img
-            src={image}
+            src={`${urlCloudinary}${image}`}
             alt="image_recipe"
             className="w-full h-66 object-cover"
           />

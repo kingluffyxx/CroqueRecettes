@@ -1,6 +1,6 @@
 <div{{attributes}}>
 	<p>
-		{{ form_start(form,  {'action': path('recipe_create'), attr: {
+		{{ form_start(form,  {attr: {
                 novalidate: true,
                 'data-action': 'live#action:prevent',
                 'data-live-action-param': 'files|saveRecipe',
@@ -41,8 +41,8 @@
 			{% endfor %}
 			<fieldset class="fieldset">
 				<legend class="fieldset-legend">Choisir un fichier</legend>
-				<input type="file" class="w-full file-input" id="image_recipe" name="image_recipe"/>
-				<label class="label" for="image_recipe">Taille maximale : 2 Mo</label>
+				<input type="file" class="w-full file-input" id="image" name="image_recipe"  data-model="imageRecipe"/>
+				<label class="label" for="image">Taille maximale : 2 Mo</label>
 			</fieldset>
 			<button type="submit" class="px-4 py-2 rounded transition btn btn-primary {{ this.hasValidationErrors ? 'btn-disabled' : '' }}">
 				 Ajouter une recette
